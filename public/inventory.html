@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="inventory.css">
+
+    <script src="https://kit.fontawesome.com/b25957ae4f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <h1>My dashboard</h1>
+        <ul>
+            <li>
+                <a href="dashboard.html">
+                    <span><i class="fa-regular fa-user"></i></span>
+                    <span>Admin Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="inventory.html">
+                    <span><i class="fa-sharp fa-solid fa-boxes-stacked"></i></span>
+                    <span>Inventory</span>
+                </a>
+            </li>
+            <li>
+                <a href="finance.html">
+                    <span><i class="fa-solid fa-coins"></i></span>
+                    <span>Finance</span>
+                </a>
+            </li>
+            <li>
+                <a href="history.html">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                    <span>History</span>
+                </a>
+            </li>
+            <li>
+                <a href="supplier.html">
+                    <span><i class="fa-solid fa-parachute-box"></i></span>
+                    <span>Supplier</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="main_container">
+        <div class="board_container">
+            <h2>Inventory</h2>
+            <button class="add_new_item">Insert new product</button>
+
+            <div class="search-wrapper">
+                <label for="search">Search products by name</label>
+                <input type="search" id="search" placeholder="Enter search phase">
+            </div>
+
+            <div class="board_product_container" id="board">
+                <div class="attribute_container">
+                    <div class="ID_attr col_attr">ID</div>
+                    <div class="name_attr col_attr">Product Name</div>
+                    <div class="category_attr col_attr">Category</div>
+                    <div class="supplier_attr col_attr">Supplier</div>
+                    <div class="quantity_attr col_attr">Quantity</div>
+                    <div class="buy_price_attr col_attr">Buying price</div>
+                    <div class="sell_price_attr col_attr">Selling price</div>
+                    <div class="action_attr col_attr">Action</div>
+                </div>
+
+            </div>
+
+            <div class="Warning">Not Found Any Item. Please Check It Again </div>
+            <div class="alertNoItem">There have no product available should be displayed</div>
+        </div>
+        <div class="footer">
+            <p>My-Inventory ©2023 Created by ThanhCoding</p>
+        </div>
+    </div>
+
+    <div class="add_form_container">
+        <div class="add_form" id="add_new_item_form">
+            <div class="add_form_header">
+                <a class="add_close">&times;</a>
+                <h2 style="padding-left: 10px;">Insert new product</h2>
+            </div>
+            <hr />
+            <div class="add_form_body">
+                <label class="name_label add_label">Product name</label>
+                <input type="text" placeholder="Product name" id="name" maxlength="50" required>
+                <label for="category" class="category_label add_label">Category</label>
+                <select name="category" id="category" required>
+                    <option value="" selected disabled hidden>Choose here</option>
+                </select>
+
+                <label for="supplier" class="supplier_label add_label">Supplier</label>
+                <select name="supplier" id="supplier" required>
+                    <option value="" selected disabled hidden>Choose here</option>
+                </select>
+                <label class="sell_price_label add_label">Selling price</label>
+                <input type="number" min="0" placeholder="min 0" id="sell_price" required>
+                <label class="buy_price_label add_label">Buying price</label>
+                <input type="number" min="0" placeholder="min 0" id="buy_price" required>
+            </div>
+            <div class="add_form_footer">
+
+                <button id="cancel_add_button">Cancel</button>
+
+                <button id="ok_add_button">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit_form_container">
+        <div class="edit_form" id="edit_new_item_form">
+            <div class="edit_form_header">
+                <a class="edit_close">&times;</a>
+                <h2 style="padding-left: 10px;">Edit product</h2>
+            </div>
+            <hr />
+            <div class="edit_form_body">
+                <label class="name_label edit_label">Product name</label>
+                <input type="text" placeholder="Item name" id="name" maxlength="50" required />
+                <label for="category" class="category_label edit_label">Category</label>
+                <select name="category" id="category">
+                    <option value="" id="optCate" selected disabled hidden></option>
+                </select>
+
+                <label for="supplier" class="supplier_label edit_label">Supplier</label>
+                <select name="supplier" id="supplier">
+                    <option value="" id="optSupp" selected disabled hidden></option>
+                </select>
+                <label class="sell_price_label edit_label">Selling price</label>
+                <input type="number" min="0" id="sell_price">
+                <label class="buy_price_label edit_label">Buying price</label>
+                <input type="number" min="0" id="buy_price">
+            </div>
+            <div class="edit_form_footer">
+                <button id="cancel_edit_button">Cancel</button>
+                <button id="ok_edit_button">OK</button>
+            </div>
+        </div>
+    </div>
+
+<!-- 
+    <div class="quantity_form_container">
+        <div class="quantity_form" id="quantity_new_item_form">
+            <div class="quantity_form_header">
+                <a class="quantity_close">&times;</a>
+                <h2 style="padding-left: 10px;">Update quantity</h2>
+            </div>
+            <hr />
+            <div class="quantity_form_body">
+                <label for="quantity_action" class="action_label quantity_label">Action</label>
+                <select name="quantity_action" id="quantity_action">
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value ="add_quantity">Add</option>
+                    <option value = "reduce_quantity">Reduce</option>
+                </select>
+                <label class="sell_price_label quantity_label">Quantity</label>
+                <input type="number" min="0" id="sell_price">
+            </div>
+            <div class="quantity_form_footer">
+                <button id="cancel_quantity_button">Cancel</button>
+                <button id="ok_quantity_button">OK</button>
+            </div>
+        </div>
+    </div> -->
+    <script src="inventory.js"></script>
+</body>
+
+</html>

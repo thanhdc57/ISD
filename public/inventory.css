@@ -1,0 +1,475 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.dashboard-container {
+    width: 15%;
+    height: 100vh;
+    background-color: #18212d;
+    color: rgba(206, 216, 224, 0.493);
+    position: fixed;
+}
+
+.dashboard-container h1 {
+    padding: 15px;
+    font-size: 26px;
+    color: bisque;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.dashboard-container ul li {
+    background-color: #18212d;
+    padding: 30px 30px;
+    font-size: 15px;
+}
+
+.dashboard-container ul li a {
+
+    text-decoration: none;
+    color: white;
+}
+
+.dashboard-container ul li a>span {
+    margin-right: 12px;
+}
+
+.dashboard-container ul li a :hover {
+    color: rgb(9, 198, 245);
+
+}
+
+.dashboard-container ul li:nth-child(2) {
+    background-color: #6A7EFC;
+}
+
+.main_container {
+    width: 85%;
+    height: 100vh;
+    margin-left: 15%;
+    background-color: rgba(112, 109, 109, 0.333);
+    padding: 20px 20px 0px;
+   
+}
+
+.board_container {
+    width: 100%;
+    height: 95%;
+    background-color: #fff;
+    padding: 24px;
+    overflow: auto;
+}
+
+
+
+.board_container>h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 35px;
+}
+
+.add_new_item {
+    padding: 10px 16px;
+    background-color: #3F52E3;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+/* search function */
+.search-wrapper {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+#search {
+    margin: 10px 0px;
+    width: 300px;
+    height: 30px;
+    padding-left: 10px;
+}
+
+
+.board_product_container {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    margin-top: 40px;
+    overflow: auto;
+}
+
+
+
+.board_container::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.board_container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.board_container::-webkit-scrollbar-thumb {
+    background: #c5bfbf;
+}
+
+/* Handle on hover */
+.board_container::-webkit-scrollbar-thumb:hover {
+    background: #9b9696;
+}
+
+
+.attribute_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5% 20% 10% 10% 10% 15% 15% 15%;
+    background-color: #dfe4ea;
+}
+
+.col_attr {
+    border-right: 0.1px solid rgb(203, 197, 197);
+    padding: 16px;
+}
+
+.col_attr:last-child {
+    border-right: none;
+}
+
+.value_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5% 20% 10% 10% 10% 15% 15% 15%;
+    background-color: #ffffff;
+    border-bottom: 0.1px solid rgb(207, 201, 201);
+    overflow: auto;
+}
+
+.name_value_attr{
+    cursor: pointer;
+}
+
+.value_container:last-child {
+    border-bottom: none;
+}
+
+#edit_button {
+    padding: 8px 12px;
+    background-color: #3F52E3;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#delete_button {
+    margin-left: 7px;
+    padding: 8px 12px;
+    background-color: #F12D2D;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.footer {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* add form css */
+
+
+.form_container {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 147, 5);
+}
+
+.add_form {
+    position: fixed;
+    top: 20%;
+    bottom: 0%;
+    left: 55%;
+    right: 10%;
+    transform: translate(-50%, -10%);
+    background-color: rgb(237, 237, 237);
+    border-radius: 8px;
+    
+}
+
+.add_form_header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.add_close {
+    position: absolute;
+    left: 95%;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.add_form_body {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add_label {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+
+#name {
+    /* float:right; */
+    height: 30px;
+    width: 300px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#category {
+    height: 30px;
+    width: 150px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#supplier {
+    height: 30px;
+    width: 150px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#sell_price {
+    height: 30px;
+    width: 100px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#buy_price {
+    height: 30px;
+    width: 100px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+#cancel_add_button {
+    position: absolute;
+    left: 85%;
+    top: 90%;
+    padding: 8px 12px;
+    background-color: #F12D2D;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#ok_add_button {
+    position: absolute;
+    left: 75%;
+    top: 90%;
+    padding: 8px 12px;
+    background-color: #3F52E3;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* edit form css */
+
+
+.edit_form {
+    position: fixed;
+    top: 20%;
+    bottom: 0%;
+    left: 55%;
+    right: 10%;
+    transform: translate(-50%, -10%);
+    background-color: rgb(237, 237, 237);
+    border-radius: 8px;
+
+}
+
+.edit_form_header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.edit_close {
+    position: absolute;
+    left: 95%;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.edit_form_body {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_label {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+#cancel_edit_button {
+    position: absolute;
+    left: 85%;
+    top: 90%;
+    padding: 8px 12px;
+    background-color: #F12D2D;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#ok_edit_button {
+    position: absolute;
+    left: 75%;
+    top: 90%;
+    padding: 8px 12px;
+    background-color: #3F52E3;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+/* quantity form */
+.quantity_form {
+    position: fixed;
+    top: 20%;
+    bottom: 40%;
+    left: 55%;
+    right: 10%;
+    transform: translate(-50%, 20%);
+    background-color: rgb(237, 237, 237);
+    border-radius: 8px;
+    
+}
+.quantity_form_header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.quantity_close {
+    position: absolute;
+    left: 95%;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+.quantity_form_body {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.quantity_label {
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+#cancel_quantity_button {
+    position: absolute;
+    left: 85%;
+    top: 85%;
+    padding: 8px 12px;
+    background-color: #F12D2D;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#ok_quantity_button {
+    position: absolute;
+    left: 75%;
+    top: 85%;
+    padding: 8px 12px;
+    background-color: #3F52E3;
+    color: white;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#quantity_action{
+    height: 30px;
+    width: 150px;
+    margin: 15px 20px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+
+.Warning {
+    display: none;
+    font-size: 40px;
+    color: #fc1b1b;
+}
+
+.alertNoItem{
+    display: none;
+    font-size: 40px;
+    color: #fc1b1b;
+}
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+select:required:invalid {
+    color: gray;
+  }
+  option[value=""][disabled] {
+    display: none;
+  }
+  option {
+    color: black;
+  }
