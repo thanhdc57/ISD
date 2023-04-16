@@ -33,6 +33,44 @@ function init() {
 
 }
 
+//submenu show/ hide funtion.
+document.addEventListener("click", function (e) {
+    let clickedEl = e.target;
+    if (clickedEl.classList.contains("showHideSubMenu")) {
+      let subMenu = clickedEl.closest("li").querySelector(".subMenus");
+      let mainMenuIcon = clickedEl
+        .closest("li")
+        .querySelector(".mainMenuIconArow");
+  
+      //close open submenus
+      let subMenus = document.querySelectorAll(".subMenus");
+      subMenus.forEach((sub) => {
+        if (subMenu !== sub) {
+          sub.style.display = "none";
+        }
+      });
+      //check if there is submenu
+      showHideSubMenu(subMenu, mainMenuIcon);
+    }
+  });
+  
+  function showHideSubMenu(subMenu, mainMenuIcon) {
+    //console.log(subMenu.style.display);
+    if (subMenu != null) {
+      if (subMenu.style.display == "block") {
+        //console.log(subMenu.style.display);
+        subMenu.style.display = "none";
+        mainMenuIcon.classList.remove("fa-angle-down");
+        mainMenuIcon.classList.add("fa-angle-left");
+      } else {
+        subMenu.style.display = "block";
+        mainMenuIcon.classList.remove("fa-angle-left");
+        mainMenuIcon.classList.add("fa-angle-down");
+      }
+    }
+  }
+  
+
 let addForm = document.querySelector("#add_new_item_form");
 let editForm = document.querySelector("#edit_new_item_form");
 addForm.style.display = "none";
@@ -71,14 +109,14 @@ function showProducts(rows) {
 		let sellPrice = rows[i]["sellPrice"];
 		board.innerHTML +=
 			"  <div class=\"value_container\">\n" +
-			"<div class=\"ID_value_attr col_attr\">" + productID + "</div>\n" +
-			"<div class=\"name_value_attr col_attr\">" + productName + "</div>\n" +
-			"<div class=\"category_value_attr col_attr\">" + categoryName + "</div>\n" +
-			"<div class=\"supplier_value_attr col_attr\">" + supplierName + "</div>\n" +
-			"<div class=\"quantity_value_attr col_attr\">" + quantity + "</div>\n" +
-			"<div class=\"buy_price_value_attr col_attr\">" + buyPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + " VND</div>\n" +
-			"<div class=\"sell_price_value col_attr\">" + sellPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + " VND</div>\n" +
-			"<div class=\"action_value_attr col_attr\">\n" +
+			"<div class=\"ID_value_attr value_attr\">" + productID + "</div>\n" +
+			"<div class=\"name_value_attr value_attr\">" + productName + "</div>\n" +
+			"<div class=\"category_value_attr value_attr\">" + categoryName + "</div>\n" +
+			"<div class=\"supplier_value_attr value_attr\">" + supplierName + "</div>\n" +
+			"<div class=\"quantity_value_attr value_attr\">" + quantity + "</div>\n" +
+			"<div class=\"buy_price_value_attr value_attr\">" + buyPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + " VND</div>\n" +
+			"<div class=\"sell_price_value_attr value_attr\">" + sellPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + " VND</div>\n" +
+			"<div class=\"action_value_attr value_attr\">\n" +
 			"<button id=\"edit_button\">Edit</button>\n" +
 			"<button id=\"delete_button\">Delete</button>\n" +
 			"</div>\n" +
@@ -218,6 +256,110 @@ okAddBtn.addEventListener("click", () => {
 	pEleBuyPrice[0].value = ""
 	pEleSellPrice[0].value = ""
 })
+
+// filter
+
+let sSupplier = document.querySelectorAll("#sSupplier")
+let sCategory = document.querySelectorAll("#sCategory")
+let filterBtn = document.querySelector("#filter")
+filterBtn.addEventListener("click", () => {
+	// clear hide when click
+	let names = []
+	let productName = document.querySelectorAll(".name_value_attr")
+	productName.forEach(e => {
+		names.push({ name: e.innerText, element: e.parentElement })
+	})
+	names.forEach(n => {
+		if (n.element.classList.contains("hide")) {
+			n.element.classList.toggle("hide")
+
+		}
+		const warning = document.querySelector(".Warning")
+		if (warning.classList.contains("show") == true) {
+			warning.classList.toggle("show")
+		}
+
+	});
+	let inputCategory = sCategory[0].value;
+	let inputSupplier = sSupplier[0].value;
+	let fil = []
+	fil = { category: inputCategory, supplier: inputSupplier }
+	let formBody = new FormData();
+	formBody.append("pSupplier", fil.supplier);
+	formBody.append("pCategory", fil.category);
+	fetch("/api/filter", {
+		method: "POST",
+		body: formBody
+	})
+		.then(statusCheck)
+		.then(resp => resp.json())
+		.then(filterByCateAndSup)
+		.catch(console.log)
+})
+
+
+function filterByCateAndSup(filout) {
+	let filName = []
+	let names = []
+	filout.forEach(e => {
+		filName.push({ name: e.productName })
+	})
+	console.log(filName)
+	let productName = document.querySelectorAll(".name_value_attr")
+	productName.forEach(e => {
+		names.push({ name: e.innerText, element: e.parentElement })
+	})
+	console.log(names)
+	if (filout.length === 0) {
+		names.forEach(n => {
+			const warning = document.querySelector(".Warning")
+			n.element.classList.toggle("hide")
+			warning.classList.toggle("show", document.querySelectorAll(".hide").length == document.querySelectorAll(".value_container").length)
+		})
+	} else {
+		let temp = names
+		names.forEach(n => {
+			n.element.classList.toggle("hide");
+		})
+		for (let n = 0; n < names.length; n++) {
+			console.log(names[n].name)
+			for (let i = 0; i < filout.length; i++) {
+				console.log(names[n].name)
+				if (names[n].name === filout[i].productName) {
+					console.log(filout[i].productName)
+					names[n].element.classList.toggle("hide")
+				}
+			}
+		}
+	}
+	// let names = []
+	// let fil = []
+	// filout.forEach(e => {
+	// 	fil.push({ name: e.productName })
+	// })
+	// let productName = document.querySelectorAll(".name_value_attr")
+	// productName.forEach(e => {
+	// 	names.push({ name: e.innerText, element: e.parentElement })
+	// })
+	// if (filout.length === 0) {
+
+	// } else {
+	// 	console.log(filout)
+	// 	for (let i = 0; i < filout.length; i++) {
+	// 		const warning = document.querySelector(".Warning")
+	// 		names.forEach(n => {
+	// 				}
+	// 			}else {
+	// 				if(!n.element.classList.contains('hide')) {
+
+	// 				}
+	// 			}
+	// 		})
+	// 	}
+	// }
+
+
+}
 
 
 function insertProduct(inputUser) {
@@ -436,7 +578,7 @@ function getSuppInfo(rows) {
 	});
 
 	let showSupplier = document.querySelectorAll("#supplier")
-
+	let supFilter = document.querySelectorAll("#sSupplier")
 	let temp = "";
 
 	suppliers.forEach(s => {
@@ -445,20 +587,28 @@ function getSuppInfo(rows) {
 	console.log(temp)
 	showSupplier.forEach(sup => {
 		sup.innerHTML += temp
-	})
+	});
+	supFilter.forEach(sup => {
+		sup.innerHTML += temp
+	});
+
 }
 function getCateInfo(rows) {
 	rows.forEach(r => {
 		categories.push(r)
 	});
 	let showCategory = document.querySelectorAll("#category")
+	let filSup = document.querySelectorAll("#sCategory")
 	let temp = "";
 	categories.forEach(c => {
 		temp += " <option value=\"" + c.categoryName + "\">" + c.categoryName + "</option>\n "
 	});
 	showCategory.forEach(cate => {
 		cate.innerHTML += temp
-	})
+	});
+	filSup.forEach(cate => {
+		cate.innerHTML += temp
+	});
 
 }
 

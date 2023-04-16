@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="purchase.css" />
     <script
       src="https://kit.fontawesome.com/b25957ae4f.js"
       crossorigin="anonymous"
@@ -37,12 +37,12 @@
             <i class="fa fa-angle-left mainMenuIconArow showHideSubMenu"></i>
           </a>
           <ul class="subMenus" id="user">
-            <li class="subMenuLink">
-              <a href="purchase.html">
+            <li class="subMenuLink sub1">
+              <a href="#">
                <span>Purchase Products</span>
                 </a>
             </li>
-            <li class="subMenuLink">
+            <li class="subMenuLink sub2">
               <a href="#">
                 <span>Sell Products</span>
               </a>
@@ -71,13 +71,38 @@
     </div>
     <div class="main_container">
       <div class="board_container">
-       
+        <div id="dashboardMainContainer">
+          <div class="dashboard_content_container" id="dashboard_content_container">
+            <div class="dashboard_content">
+              <div class="dashboard_content_main">
+                <div class="row">
+                  <div class="column column-12">
+                    <h1 class="section_header">
+                      <i class="fa fa-plus"></i> Purchase Product
+                    </h1>
+                    <div>
+                      <div class="alignRight">
+                        <button id="purchaseProductBtn">
+                          Add New Purchase Product report
+                        </button>
+                      </div>
+                      <div id="purchaseProductList">
+                      </div>
+                      <div class="alignRight">
+                        <button class="submitBtn">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="footer">
         <p>My-Inventory ©2020 Created by ThanhCoding</p>
       </div>
     </div>
-    <script src="dashboard.js"></script>
-  
+    <script src="purchase.js"></script>
   </body>
 </html>

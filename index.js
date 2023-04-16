@@ -216,6 +216,82 @@ app.post("/api/filter", async function (req, res) {
 
 })
 
+app.post("/api/update/history", async function (req, res) {
+  res.type("text");
+  let action = req.body.pAction
+  let productName = req.body.pName;
+  let productQuantity = req.body.pQuantity
+  if(action == undefined || productName == undefined || productQuantity == undefined){
+    res.status(400).send("Missing required paramaters");
+  }else{
+      try {
+    let db = await getDBConnection();
+    let sql = "INSERT into history(action,productName,quantity) VALUES(?,?,?)";
+    await db.all(sql, [action,productName,productQuantity]);
+    await db.close();
+  } catch {
+    res.status(500).send("Something went wrong on the server.");
+  }
+  }
+
+});
+
+app.post("/api/quantity/add", async function (req, res) {
+  res.type("text");
+  let productName = req.body.pName;
+  let productQuantity = req.body.pQuantity
+  if(productName == undefined || productQuantity == undefined){
+    res.status(400).send("Missing required paramaters");
+  }else{
+      try {
+    let db = await getDBConnection();
+    let sql = "UPDATE product SET quantity = quantity + ? where productName = ?";
+    await db.all(sql, [productQuantity,productName]);
+    await db.close();
+    res.send("you have updated product quantity successfully")
+  } catch {
+    res.status(500).send("Something went wrong on the server.");
+  }
+  }
+});
+
+app.post("/api/quantity/reduce", async function (req, res) {
+  res.type("text");
+  let productName = req.body.pName;
+  let productQuantity = req.body.pQuantity
+  if(productName == undefined || productQuantity == undefined){
+    res.status(400).send("Missing required paramaters");
+  }else{
+    let currentQuantity = await getProductQuantity(productName);
+    if (currentQuantity < productQuantity){
+      res.send("the product not have enough quantity")
+    } else{
+       try {
+    let db = await getDBConnection();
+    let sql = "UPDATE product SET quantity = quantity - ? where productName = ?";
+    await db.all(sql, [productQuantity,productName]);
+    await db.close();
+    res.send("you have updated product quantity successfully")
+  } catch {
+    res.status(500).send("Something went wrong on the server.");
+  }
+  }
+    }
+     
+});
+
+async function getProductQuantity(productName){
+  let db = await getDBConnection();
+  let sql = "SELECT quantity FROM product WHERE productName = ?;";
+  let rows = await db.all(sql, productName);
+  let quantity;
+  for (let i = 0; i < rows.length; i++) {
+    quantity = rows[i]["quantity"];
+  }
+  await db.close();
+  return quantity;
+}
+
 
 async function getCategoryID(category) {
   let db = await getDBConnection();

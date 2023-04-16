@@ -14,39 +14,60 @@
 <body>
     <div class="dashboard-container">
         <h1>My dashboard</h1>
-        <ul>
-            <li>
-                <a href="dashboard.html">
-                    <span><i class="fa-regular fa-user"></i></span>
-                    <span>Admin Dashboard</span>
+        <ul class="memu_lists">
+          <li class="liMainMenu">
+            <a href="dashboard.html">
+              <span><i class="fa-regular fa-user"></i></span>
+              <span>Admin Dashboard</span>
+            </a>
+          </li>
+          <li class="liMainMenu">
+            <a href="inventory.html">
+              <span><i class="fa-sharp fa-solid fa-boxes-stacked"></i></span>
+              <span>Inventory</span>
+            </a>
+          </li>
+          <li class="liMainMenu showHideSubMenu">
+            <a href="javascript:void(0);" class="showHideSubMenu">
+              <span
+                ><i class="fa-solid fa-parachute-box showHideSubMenu"></i
+              ></span>
+              <span class="menuText showHideSubMenu">Sales Manage</span>
+              <i class="fa fa-angle-left mainMenuIconArow showHideSubMenu"></i>
+            </a>
+            <ul class="subMenus" id="user">
+              <li class="subMenuLink">
+                <a href="purchase.html">
+                 <span>Purchase Products</span>
+                  </a>
+              </li>
+              <li class="subMenuLink">
+                <a href="#">
+                  <span>Sell Products</span>
                 </a>
-            </li>
-            <li>
-                <a href="inventory.html">
-                    <span><i class="fa-sharp fa-solid fa-boxes-stacked"></i></span>
-                    <span>Inventory</span>
-                </a>
-            </li>
-            <li>
-                <a href="finance.html">
-                    <span><i class="fa-solid fa-coins"></i></span>
-                    <span>Finance</span>
-                </a>
-            </li>
-            <li>
-                <a href="history.html">
-                    <span><i class="fa-solid fa-clock-rotate-left"></i></span>
-                    <span>History</span>
-                </a>
-            </li>
-            <li>
-                <a href="supplier.html">
-                    <span><i class="fa-solid fa-parachute-box"></i></span>
-                    <span>Supplier</span>
-                </a>
-            </li>
+              </li>
+            </ul>
+          </li>
+          <li class="liMainMenu">
+            <a href="finance.html">
+              <span><i class="fa-solid fa-coins"></i></span>
+              <span>Finance</span>
+            </a>
+          </li>
+          <li class="liMainMenu">
+            <a href="history.html">
+              <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+              <span>History</span>
+            </a>
+          </li>
+          <li class="liMainMenu">
+            <a href="supplier.html">
+              <span><i class="fa-solid fa-parachute-box"></i></span>
+              <span>Supplier</span>
+            </a>
+          </li>
         </ul>
-    </div>
+      </div>
 
 
     <div class="main_container">
@@ -55,10 +76,42 @@
             <button class="add_new_item">Insert new product</button>
 
             <div class="search-wrapper">
-                <label for="search">Search products by name</label>
-                <input type="search" id="search" placeholder="Enter search phase">
-            </div>
+                <div class="search-product">
+                    <label for="search">Search products by name<br></label>
+                    <input type="search" id="search" placeholder="Enter search phase">
 
+                </div>
+                <!-- <label for="filterCategory">Category</label>
+                <select name="sCategory" id="sCategory" required>
+                    <option value="" selected disabled hidden>Filter
+                        Supplier</option>
+                </select>
+                <label for="filterSupplier">Supplier</label>
+                <select name="sSupplier" id="sSupplier" required>
+                    <option value="" selected disabled hidden>Filter
+                        Supplier</option>
+                </select> -->
+                <div class="order">
+                <ul>
+                    <li>
+                        <div id="categoryFil">Category</div>
+                        <select class = "sCategory" name="sCategory" id="sCategory" required>
+                            <option value="" >Choose Category</option>
+                        </select>
+                        
+                    </li>
+                    <li>
+                        <div>Supplier</div>
+                        <select class="sSupplier" name="sSupplier" id="sSupplier" required>
+                            <option value="" >Choose Supplier</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button id="filter">FILTER</button>
+                    </li>
+                </ul>
+            </div>
+            </div>
             <div class="board_product_container" id="board">
                 <div class="attribute_container">
                     <div class="ID_attr col_attr">ID</div>
@@ -145,30 +198,6 @@
         </div>
     </div>
 
-<!-- 
-    <div class="quantity_form_container">
-        <div class="quantity_form" id="quantity_new_item_form">
-            <div class="quantity_form_header">
-                <a class="quantity_close">&times;</a>
-                <h2 style="padding-left: 10px;">Update quantity</h2>
-            </div>
-            <hr />
-            <div class="quantity_form_body">
-                <label for="quantity_action" class="action_label quantity_label">Action</label>
-                <select name="quantity_action" id="quantity_action">
-                    <option value="" selected disabled hidden>Choose here</option>
-                    <option value ="add_quantity">Add</option>
-                    <option value = "reduce_quantity">Reduce</option>
-                </select>
-                <label class="sell_price_label quantity_label">Quantity</label>
-                <input type="number" min="0" id="sell_price">
-            </div>
-            <div class="quantity_form_footer">
-                <button id="cancel_quantity_button">Cancel</button>
-                <button id="ok_quantity_button">OK</button>
-            </div>
-        </div>
-    </div> -->
     <script src="inventory.js"></script>
 </body>
 
