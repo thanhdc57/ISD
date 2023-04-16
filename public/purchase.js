@@ -121,7 +121,7 @@ document.addEventListener("click", function (e) {
               <label style="padding: 10px; font-size:15px" for="product_name">Product Name: </label>\
               <div style="padding: 10px" class="select-box">\
                   <div class="select-option">\
-                    <input type="text" placeholder="Select product name" id="soValue" readonly name="" value ="ưẻ" />\
+                    <input type="text" placeholder="Select product name" id="soValue" readonly name="" value ="" />\
                   </div>\
                   <div class="content">\
                     <div class="search">\
